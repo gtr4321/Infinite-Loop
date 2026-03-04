@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import type { SiteData, Article, FeedItem, Project, Video } from "@/types";
+import type { Article, FeedItem, Project, Video } from "@/types";
 import {
   preloadSiteData,
   getFeed,

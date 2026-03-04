@@ -2,7 +2,6 @@ import { useArticles } from "@/lib/useSiteData";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, ArrowRight, Loader2 } from "lucide-react";
 import { Link } from "wouter";
-import type { Article } from "@/types";
 
 const ARTICLES_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663287023784/FU8KrTQkmJEEcfhuSWS3mH/articles-bg-37MUDrinczoQCwh9boTecm.webp";
 

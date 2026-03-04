@@ -1,7 +1,6 @@
 import { useProjects } from "@/lib/useSiteData";
 import { motion } from "framer-motion";
 import { Folder, Star, GitFork, ExternalLink, Github, Loader2 } from "lucide-react";
-import type { Project } from "@/types";
 
 const PROJECTS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663287023784/FU8KrTQkmJEEcfhuSWS3mH/projects-bg-nw6kcZVNHsu43qKUsjAyuh.webp";
 
