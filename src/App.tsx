@@ -1,4 +1,4 @@
-import { Route, Switch } from "wouter";
+import { Router, Route, Switch } from "wouter";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -8,7 +8,10 @@ import Videos from "@/pages/Videos";
 import Projects from "@/pages/Projects";
 import NotFound from "@/pages/NotFound";
 
-function Router() {
+// 与 Vite base 一致，保证在 gtr4321.github.io/Infinite-Loop/ 下路由与链接正确
+const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "";
+
+function Routes() {
   return (
     <Layout>
       <Switch>
@@ -26,5 +29,9 @@ function Router() {
 }
 
 export default function App() {
-  return <Router />;
+  return (
+    <Router base={base}>
+      <Routes />
+    </Router>
+  );
 }
