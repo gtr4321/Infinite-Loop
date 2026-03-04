@@ -1,0 +1,63 @@
+{
+  "feed": [
+    {
+      "id": 1,
+      "title": "欢迎来到无限循环",
+      "content": "这里将记录技术探索、项目实践与思考感悟。",
+      "type": "update",
+      "tags": "[\"动态\"]",
+      "likes": 0,
+      "comments": 0,
+      "createdAt": "2025-03-01T00:00:00.000Z"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "title": "示例文章：前后端分离与静态站点",
+      "summary": "将个人站改为 GitHub Pages 托管的前后端分离架构说明。",
+      "content": "## 架构说明\n\n本站采用**前后端分离**：\n\n- **前端**：纯静态 SPA，部署在 GitHub Pages。\n- **数据**：来自仓库内 `public/data/site.json`，或通过环境变量 `VITE_API_URL` 指向自建 API。\n\n### 如何更新内容\n\n直接编辑 `public/data/site.json` 中的 `articles`、`feed`、`projects`、`videos` 数组，提交后重新构建即可。",
+      "category": "技术",
+      "tags": "[\"GitHub Pages\", \"前端\"]",
+      "coverImage": null,
+      "readTime": 5,
+      "featured": true,
+      "published": true,
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "updatedAt": "2025-03-01T00:00:00.000Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "无限循环",
+      "description": "个人网站前端，Digital Topography 风格，支持 GitHub Pages 静态部署。",
+      "tech": "[\"React\", \"TypeScript\", \"Vite\", \"Tailwind\"]",
+      "stars": 0,
+      "forks": 0,
+      "status": "active",
+      "link": null,
+      "github": null,
+      "published": true,
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "updatedAt": "2025-03-01T00:00:00.000Z"
+    }
+  ],
+  "videos": [
+    {
+      "id": 1,
+      "title": "【4KHDR 真彩®】《最佳 4K HDR》—— ULTRA HD 60帧 杜比视界测试片源",
+      "description": "壁纸级 4K 8K HDR 画质测试，杜比视界。",
+      "bvid": null,
+      "bilibiliUrl": "https://b23.tv/yskf9Oy",
+      "thumbnail": null,
+      "duration": null,
+      "category": "教程",
+      "views": null,
+      "likes": null,
+      "published": true,
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "updatedAt": "2025-03-01T00:00:00.000Z"
+    }
+  ]
+}
