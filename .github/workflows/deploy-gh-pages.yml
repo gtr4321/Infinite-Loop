@@ -43,8 +43,11 @@ jobs:
           test -f dist/index.html || (echo "Missing dist/index.html" && exit 1)
           test -f dist/404.html || (echo "Missing dist/404.html" && exit 1)
 
+      # 若报错 "Get Pages site failed"，请到 Settings → Pages 将 Source 选为 GitHub Actions
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        with:
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

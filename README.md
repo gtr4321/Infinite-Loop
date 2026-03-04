@@ -63,8 +63,8 @@ npm run preview
 
    **https://gtr4321.github.io/Infinite-Loop/**
 
-**若仍 404**：  
-- 确认 [Settings → Pages](https://github.com/gtr4321/Infinite-Loop/settings/pages) 的 **Source** 为 **GitHub Actions**（不是 Deploy from a branch）。  
+**若仍 404 或 Actions 报错 “Get Pages site failed”**：  
+- 必须到 [Settings → Pages](https://github.com/gtr4321/Infinite-Loop/settings/pages)，在 **Build and deployment** 里将 **Source** 选为 **GitHub Actions**（不是 Deploy from a branch），保存。保存后重新跑一次 workflow 或再 push 一次。  
 - 在 [Actions](https://github.com/gtr4321/Infinite-Loop/actions) 中查看最近一次 “Deploy to GitHub Pages” 是否成功；若失败可点进查看日志。  
 - 若启用了 Environment 审批，需在 **Settings → Environments → github-pages** 中批准首次部署。
 
