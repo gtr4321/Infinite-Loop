@@ -37,6 +37,12 @@ jobs:
         env:
           GITHUB_PAGES_REPO: ${{ github.event.repository.name }}
 
+      - name: Verify build output
+        run: |
+          ls -la dist/
+          test -f dist/index.html || (echo "Missing dist/index.html" && exit 1)
+          test -f dist/404.html || (echo "Missing dist/404.html" && exit 1)
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

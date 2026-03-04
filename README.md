@@ -59,9 +59,14 @@ npm run preview
    ```
 
 3. **查看部署**  
-   打开 [Actions](https://github.com/gtr4321/Infinite-Loop/actions)，等 “Deploy to GitHub Pages” 跑绿。站点地址：
+   打开 [Actions](https://github.com/gtr4321/Infinite-Loop/actions)，等 “Deploy to GitHub Pages” 跑绿。站点地址（务必带末尾斜杠）：
 
    **https://gtr4321.github.io/Infinite-Loop/**
+
+**若仍 404**：  
+- 确认 [Settings → Pages](https://github.com/gtr4321/Infinite-Loop/settings/pages) 的 **Source** 为 **GitHub Actions**（不是 Deploy from a branch）。  
+- 在 [Actions](https://github.com/gtr4321/Infinite-Loop/actions) 中查看最近一次 “Deploy to GitHub Pages” 是否成功；若失败可点进查看日志。  
+- 若启用了 Environment 审批，需在 **Settings → Environments → github-pages** 中批准首次部署。
 
 ---
 
