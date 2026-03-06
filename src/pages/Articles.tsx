@@ -15,6 +15,45 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
+function ArticleCard({ article }: { article: { id: number; title: string; summary: string | null; content: string; category: string | null; readTime: number | null; featured: boolean; createdAt: string } }) {
+  return (
+    <Link href={`/articles/${article.id}`}>
+      <div className="glass-card rounded-2xl p-8 h-full cursor-pointer group relative overflow-hidden">
+        {article.featured && (
+          <div className="absolute top-4 right-4">
+            <span className="px-2.5 py-1 rounded-md bg-[#3b82f6]/15 border border-[#3b82f6]/25 text-[#60a5fa] text-xs font-medium">
+              精选
+            </span>
+          </div>
+        )}
+        <div className="flex items-center gap-3 mb-4">
+          <span className="px-2.5 py-1 rounded-md bg-[#6366f1]/10 text-[#818cf8] text-xs font-medium">
+            {article.category || "技术"}
+          </span>
+          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Clock size={12} />
+            {article.readTime ?? 10} 分钟
+          </span>
+        </div>
+        <h3 className="text-xl font-display font-bold text-white mb-3 group-hover:text-[#60a5fa] transition-colors leading-snug">
+          {article.title}
+        </h3>
+        <p className="text-sm text-[#94a3b8] leading-relaxed mb-6 line-clamp-3">
+          {article.summary || article.content.slice(0, 200)}
+        </p>
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-muted-foreground">
+            {new Date(article.createdAt).toLocaleDateString("zh-CN")}
+          </span>
+          <span className="flex items-center gap-1.5 text-sm text-[#60a5fa] font-medium group-hover:gap-3 transition-all">
+            阅读全文 <ArrowRight size={14} />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function Articles() {
   const { data: articles, isLoading } = useArticles();
 
@@ -53,89 +92,18 @@ export default function Articles() {
             <Loader2 className="animate-spin text-[#3b82f6]" size={32} />
           </div>
         ) : articles.length > 0 ? (
-          <>
-            {articles.filter((a) => a.featured).length > 0 && (
-              <motion.div
-                variants={stagger}
-                initial="hidden"
-                animate="show"
-                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
-              >
-                {articles.filter((a) => a.featured).map((article) => (
-                  <motion.div key={article.id} variants={fadeUp}>
-                    <Link href={`/articles/${article.id}`}>
-                      <div className="glass-card rounded-2xl p-8 h-full cursor-pointer group relative overflow-hidden">
-                        <div className="absolute top-4 right-4">
-                          <span className="px-2.5 py-1 rounded-md bg-[#3b82f6]/15 border border-[#3b82f6]/25 text-[#60a5fa] text-xs font-medium">
-                            精选
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="px-2.5 py-1 rounded-md bg-[#6366f1]/10 text-[#818cf8] text-xs font-medium">
-                            {article.category || "技术"}
-                          </span>
-                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Clock size={12} />
-                            {article.readTime ?? 10} 分钟
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-display font-bold text-white mb-3 group-hover:text-[#60a5fa] transition-colors leading-snug">
-                          {article.title}
-                        </h3>
-                        <p className="text-sm text-[#94a3b8] leading-relaxed mb-6 line-clamp-3">
-                          {article.summary || article.content.slice(0, 200)}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-muted-foreground">
-                            {new Date(article.createdAt).toLocaleDateString("zh-CN")}
-                          </span>
-                          <span className="flex items-center gap-1.5 text-sm text-[#60a5fa] font-medium group-hover:gap-3 transition-all">
-                            阅读全文 <ArrowRight size={14} />
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {articles.map((article) => (
+              <motion.div key={article.id} variants={fadeUp}>
+                <ArticleCard article={article} />
               </motion.div>
-            )}
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              animate="show"
-              className="space-y-4"
-            >
-              {articles.filter((a) => !a.featured).map((article) => (
-                <motion.div key={article.id} variants={fadeUp}>
-                  <Link href={`/articles/${article.id}`}>
-                    <div className="glass-card rounded-2xl p-5 cursor-pointer group flex items-center justify-between">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="px-2 py-0.5 rounded-md bg-[#6366f1]/10 text-[#818cf8] text-xs font-medium">
-                            {article.category || "技术"}
-                          </span>
-                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Clock size={12} />
-                            {article.readTime ?? 10} 分钟
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {new Date(article.createdAt).toLocaleDateString("zh-CN")}
-                          </span>
-                        </div>
-                        <h3 className="text-base font-display font-semibold text-white group-hover:text-[#60a5fa] transition-colors mb-1">
-                          {article.title}
-                        </h3>
-                        <p className="text-sm text-[#94a3b8] line-clamp-1">
-                          {article.summary || article.content.slice(0, 150)}
-                        </p>
-                      </div>
-                      <ArrowRight size={18} className="text-muted-foreground group-hover:text-[#60a5fa] transition-colors flex-shrink-0 ml-4" />
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-          </>
+            ))}
+          </motion.div>
         ) : (
           <div className="text-center py-20">
             <BookOpen size={48} className="mx-auto text-muted-foreground/40 mb-4" />

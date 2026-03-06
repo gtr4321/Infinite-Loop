@@ -170,4 +170,29 @@
   .line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; }
   .line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
   .line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+
+  /* Minimal prose styling (we don't use Tailwind typography plugin) */
+  .prose {
+    color: rgb(148 163 184); /* slate-400-ish */
+    line-height: 1.8;
+  }
+  .prose p { margin: 0.95em 0; }
+  .prose strong { color: #fff; font-weight: 700; }
+  .prose a { color: #60a5fa; text-decoration: none; }
+  .prose a:hover { text-decoration: underline; }
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    color: #fff;
+    font-family: var(--font-display);
+    margin: 1.25em 0 0.6em;
+    line-height: 1.25;
+  }
+  .prose ul, .prose ol { margin: 1em 0; padding-left: 1.25em; }
+  .prose li { margin: 0.35em 0; }
+  .prose blockquote {
+    margin: 1.1em 0;
+    padding-left: 1em;
+    border-left: 2px solid rgba(59, 130, 246, 0.3);
+  }
+  .prose code { color: #60a5fa; background: #1e293b; padding: 0.1em 0.35em; border-radius: 0.4em; }
+  .prose pre { background: #0f172a; padding: 1em; border-radius: 0.9em; overflow: auto; border: 1px solid rgba(59, 130, 246, 0.1); }
 }
