@@ -44,17 +44,31 @@
   "projects": [
     {
       "id": 1,
-      "name": "无限循环",
-      "description": "个人网站前端，Digital Topography 风格，支持 GitHub Pages 静态部署。",
-      "tech": "[\"React\", \"TypeScript\", \"Vite\", \"Tailwind\"]",
-      "stars": 0,
+      "name": "ShadowMixer",
+      "description": "ShadowMixer 是一个开源的 AI 隐私混币器和零信任网关。受 Tor 和 CoinJoin 启发，它利用碎片化混淆技术（Fragmented Obfuscation）将智能与身份解耦，将大模型提供商降级为盲目的算力供应商。",
+      "tech": "[\"Rust\", \"Redis\", \"Docker\"]",
+      "stars": 2,
       "forks": 0,
       "status": "active",
       "link": null,
-      "github": null,
+      "github": "https://github.com/gtr4321/ShadowMixer",
       "published": true,
-      "createdAt": "2025-03-01T00:00:00.000Z",
-      "updatedAt": "2025-03-01T00:00:00.000Z"
+      "createdAt": "2026-02-27T10:15:58.000Z",
+      "updatedAt": "2026-03-03T03:24:29.000Z"
+    },
+    {
+      "id": 2,
+      "name": "NexusReader",
+      "description": "NexusReader 是一个下一代智能情报分析系统，结合了高效的 RSS 阅读器和可视化的事件流画布。它旨在帮助用户从海量信息中提取关键情报，并通过直观的画布进行关联分析。",
+      "tech": "[\"Next.js\", \"Electron\", \"FastAPI\", \"SQLite\"]",
+      "stars": 1,
+      "forks": 0,
+      "status": "active",
+      "link": null,
+      "github": "https://github.com/gtr4321/NexusReader",
+      "published": true,
+      "createdAt": "2026-03-01T14:14:15.000Z",
+      "updatedAt": "2026-03-02T02:40:37.000Z"
     }
   ],
   "videos": [

@@ -17,3 +17,6 @@ dist/
 
 # Vite
 *.local
+
+# TypeScript build info
+tsconfig.tsbuildinfo

@@ -30,7 +30,14 @@ export async function getFeed(): Promise<FeedItem[]> {
 
 export async function getArticles(): Promise<Article[]> {
   const data = await fetchSiteData();
-  return (data.articles ?? []).filter((a) => a.published);
+  return (data.articles ?? [])
+    .filter((a) => a.published)
+    .slice()
+    .sort((a, b) => {
+      const ta = Date.parse(a.createdAt);
+      const tb = Date.parse(b.createdAt);
+      return (Number.isFinite(tb) ? tb : 0) - (Number.isFinite(ta) ? ta : 0);
+    });
 }
 
 export async function getArticleById(id: number): Promise<Article | null> {
