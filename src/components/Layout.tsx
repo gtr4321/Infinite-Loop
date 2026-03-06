@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center justify-between h-16 px-6">
               <Link href="/">
                 <span className="font-display font-bold text-xl tracking-tight gradient-text">
-                  无限循环
+                  无限循环 Infinite Loop
                 </span>
               </Link>
               <div className="hidden md:flex items-center gap-1">
@@ -115,7 +115,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start gap-2">
-              <span className="font-display font-bold text-lg gradient-text">无限循环</span>
+              <span className="font-display font-bold text-lg gradient-text">无限循环 Infinite Loop</span>
               <p className="text-sm text-muted-foreground">探索数字世界的无限可能</p>
             </div>
             <div className="flex items-center gap-6">
@@ -130,7 +130,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="mt-8 pt-6 border-t border-[#3b82f6]/5 text-center">
             <p className="text-xs text-muted-foreground/60">
-              &copy; {new Date().getFullYear()} 无限循环. All rights reserved.
+              &copy; {new Date().getFullYear()} 无限循环 Infinite Loop. All rights reserved.
             </p>
           </div>
         </div>
