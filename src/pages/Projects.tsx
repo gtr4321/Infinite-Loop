@@ -1,6 +1,8 @@
 import { useProjects } from "@/lib/useSiteData";
 import { motion } from "framer-motion";
-import { Folder, Star, GitFork, ExternalLink, Github, Loader2 } from "lucide-react";
+import { Folder, Star, GitFork, ExternalLink, Github, Loader2, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 const PROJECTS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663287023784/FU8KrTQkmJEEcfhuSWS3mH/projects-bg-nw6kcZVNHsu43qKUsjAyuh.webp";
 
@@ -35,8 +37,62 @@ function parseTech(tech: string | null): string[] {
   }
 }
 
+function getReadmeUrl(githubUrl: string | null): string | null {
+  if (!githubUrl) return null;
+  try {
+    const u = new URL(githubUrl);
+    const parts = u.pathname.split("/").filter(Boolean);
+    if (u.hostname !== "github.com") return null;
+    if (parts.length < 2) return null;
+    const owner = parts[0];
+    const repo = parts[1];
+    return `https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`;
+  } catch {
+    return null;
+  }
+}
+
 export default function Projects() {
   const { data: projects, isLoading } = useProjects();
+  const [openId, setOpenId] = useState<number | null>(null);
+  const selected = useMemo(
+    () => (openId == null ? null : projects.find((p) => p.id === openId) ?? null),
+    [openId, projects],
+  );
+  const [readme, setReadme] = useState<string | null>(null);
+  const [readmeLoading, setReadmeLoading] = useState(false);
+  const [readmeError, setReadmeError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selected) {
+      setReadme(null);
+      setReadmeLoading(false);
+      setReadmeError(null);
+      return;
+    }
+
+    const url = getReadmeUrl(selected.github);
+    if (!url) {
+      setReadme(selected.description ?? "");
+      setReadmeLoading(false);
+      setReadmeError(null);
+      return;
+    }
+
+    setReadmeLoading(true);
+    setReadmeError(null);
+    fetch(url)
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.text();
+      })
+      .then((md) => setReadme(md))
+      .catch((e: unknown) => {
+        setReadme(null);
+        setReadmeError(e instanceof Error ? e.message : "Failed to load README");
+      })
+      .finally(() => setReadmeLoading(false));
+  }, [selected]);
 
   return (
     <div>
@@ -85,19 +141,39 @@ export default function Projects() {
               const statusLabel = statusLabels[project.status || "active"] || "活跃";
               return (
                 <motion.div key={project.id} variants={fadeUp}>
-                  <div className="glass-card rounded-2xl p-6 h-full group flex flex-col">
+                  <div
+                    className="glass-card rounded-2xl p-6 h-full group flex flex-col cursor-pointer"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setOpenId(project.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") setOpenId(project.id);
+                    }}
+                  >
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#3b82f6]/20 to-[#6366f1]/20 border border-[#3b82f6]/20 flex items-center justify-center text-[#60a5fa]">
                         <Folder size={18} />
                       </div>
                       <div className="flex items-center gap-2">
                         {project.github && (
-                          <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-white transition-colors">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-white transition-colors"
+                            onClick={(e) => e.stopPropagation()}
+                          >
                             <Github size={16} />
                           </a>
                         )}
                         {project.link && (
-                          <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-white transition-colors">
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-white transition-colors"
+                            onClick={(e) => e.stopPropagation()}
+                          >
                             <ExternalLink size={16} />
                           </a>
                         )}
@@ -150,6 +226,71 @@ export default function Projects() {
           </div>
         )}
       </section>
+
+      {selected && (
+        <div className="fixed inset-0 z-[60]">
+          <div
+            className="absolute inset-0 bg-black/60"
+            onClick={() => setOpenId(null)}
+          />
+          <div className="absolute inset-0 flex items-center justify-center p-4">
+            <div className="glass-card rounded-2xl w-full max-w-4xl border border-[#3b82f6]/20 shadow-xl shadow-black/40 overflow-hidden">
+              <div className="flex items-start justify-between gap-4 p-6 border-b border-[#3b82f6]/10">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h2 className="text-xl font-display font-bold text-white truncate">
+                      {selected.name}
+                    </h2>
+                    <span className={`px-2 py-0.5 rounded-md border text-xs font-medium ${statusColors[selected.status || "active"] || statusColors.active}`}>
+                      {statusLabels[selected.status || "active"] || "活跃"}
+                    </span>
+                    {selected.github && (
+                      <a
+                        href={selected.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-[#60a5fa] hover:text-white transition-colors"
+                      >
+                        打开 GitHub
+                      </a>
+                    )}
+                  </div>
+                  {selected.description && (
+                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
+                      {selected.description}
+                    </p>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className="text-muted-foreground hover:text-white transition-colors"
+                  onClick={() => setOpenId(null)}
+                  aria-label="Close"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="p-6 max-h-[70vh] overflow-auto">
+                {readmeLoading ? (
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Loader2 className="animate-spin" size={18} />
+                    正在加载 README…
+                  </div>
+                ) : readmeError ? (
+                  <div className="text-sm text-muted-foreground">
+                    README 加载失败：{readmeError}
+                  </div>
+                ) : (
+                  <div className="prose max-w-none">
+                    <ReactMarkdown>{readme ?? ""}</ReactMarkdown>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

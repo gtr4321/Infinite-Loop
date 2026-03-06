@@ -45,6 +45,8 @@ export default function Home() {
           style={{ backgroundImage: `url(${HERO_BG})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#060b18]/40 via-[#060b18]/60 to-background" />
+        {/* Blur fade — extend softly downward */}
+        <div className="absolute left-0 right-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-[#060b18]/25 to-background backdrop-blur-2xl" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-32">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -72,7 +74,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </section>
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         {isLoading ? (
           <div className="flex justify-center py-20">
             <Loader2 className="animate-spin text-[#3b82f6]" size={32} />
