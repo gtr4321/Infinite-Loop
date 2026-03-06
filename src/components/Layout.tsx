@@ -17,19 +17,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#1e3a5f] opacity-20 blur-[120px]" />
-        <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full bg-[#3b82f6] opacity-10 blur-[100px]" />
-        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] rounded-full bg-[#6366f1] opacity-8 blur-[80px]" />
-      </div>
-
       <nav className="fixed top-0 left-0 right-0 z-50">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="mt-4 rounded-2xl bg-[#060b18]/70 backdrop-blur-xl border border-[#3b82f6]/10 shadow-lg shadow-black/20">
+          <div className="mt-4 rounded-2xl bg-card border border-border shadow-lg">
             <div className="flex items-center justify-between h-16 px-6">
               <Link href="/">
-                <span className="font-display font-bold text-xl tracking-tight gradient-text">
-                  无限循环 Infinite Loop
+                <span className="font-display font-bold text-2xl tracking-tight gradient-text">
+                  天机阁
                 </span>
               </Link>
               <div className="hidden md:flex items-center gap-1">
@@ -38,15 +32,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   return (
                     <Link key={item.path} href={item.path}>
                       <span
-                        className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                          isActive ? "text-white" : "text-[#94a3b8] hover:text-white"
+                        className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                          isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
                         }`}
                       >
                         {isActive && (
                           <motion.span
                             layoutId="nav-active"
-                            className="absolute inset-0 rounded-lg bg-[#3b82f6]/15 border border-[#3b82f6]/25"
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                            className="absolute inset-0 rounded-lg bg-primary/20 border border-border"
+                            transition={{ duration: 0.25, ease: "easeOut" }}
                           />
                         )}
                         <span className="relative z-10">{item.label}</span>
@@ -56,7 +50,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 })}
               </div>
               <button
-                className="md:hidden text-[#94a3b8] hover:text-white transition-colors"
+                className="md:hidden text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -68,8 +62,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="md:hidden overflow-hidden border-t border-[#3b82f6]/10"
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="md:hidden overflow-hidden border-t border-border"
                 >
                   <div className="px-4 py-3 space-y-1">
                     {navItems.map((item) => {
@@ -77,10 +71,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       return (
                         <Link key={item.path} href={item.path}>
                           <span
-                            className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                            className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                               isActive
-                                ? "text-white bg-[#3b82f6]/15 border border-[#3b82f6]/25"
-                                : "text-[#94a3b8] hover:text-white hover:bg-white/5"
+                                ? "text-primary-foreground bg-primary/20 border border-border"
+                                : "text-muted-foreground hover:text-foreground hover:bg-accent"
                             }`}
                             onClick={() => setMobileMenuOpen(false)}
                           >
@@ -104,33 +98,33 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
           >
             {children}
           </motion.div>
         </AnimatePresence>
       </main>
 
-      <footer className="relative z-10 border-t border-[#3b82f6]/10">
+      <footer className="relative z-10 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start gap-2">
-              <span className="font-display font-bold text-lg gradient-text">无限循环 Infinite Loop</span>
-              <p className="text-sm text-muted-foreground">探索数字世界的无限可能</p>
+              <span className="font-display font-bold text-lg gradient-text">天机阁</span>
+              <p className="text-sm text-muted-foreground">探索信息的无限可能</p>
             </div>
             <div className="flex items-center gap-6">
               {navItems.map((item) => (
                 <Link key={item.path} href={item.path}>
-                  <span className="text-sm text-muted-foreground hover:text-white transition-colors">
+                  <span className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                     {item.label}
                   </span>
                 </Link>
               ))}
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-[#3b82f6]/5 text-center">
-            <p className="text-xs text-muted-foreground/60">
-              &copy; {new Date().getFullYear()} 无限循环 Infinite Loop. All rights reserved.
+          <div className="mt-8 pt-6 border-t border-border text-center">
+            <p className="text-xs text-muted-foreground">
+              &copy; {new Date().getFullYear()} 天机阁. All rights reserved.
             </p>
           </div>
         </div>

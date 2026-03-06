@@ -1,4 +1,4 @@
-# 无限循环 — 个人网站（前后端分离 · GitHub Pages）
+# 天机阁 — 个人网站（前后端分离 · GitHub Pages）
 
 基于 [ideas.md](./ideas.md) 中的 **Digital Topography（数字地形学）** 方案实现的个人站点，前后端分离，前端可单独部署在 GitHub Pages。
 
@@ -45,7 +45,7 @@ npm run preview
    ```bash
    git init
    git add .
-   git commit -m "feat: 无限循环静态站，支持 GitHub Pages"
+   git commit -m "feat: 天机阁静态站，支持 GitHub Pages"
    git branch -M main
    git remote add origin https://github.com/gtr4321/Infinite-Loop.git
    git pull origin main --allow-unrelated-histories

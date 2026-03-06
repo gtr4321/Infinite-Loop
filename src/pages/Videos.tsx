@@ -9,7 +9,7 @@ const stagger = {
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export default function Videos() {
@@ -18,33 +18,32 @@ export default function Videos() {
   return (
     <div>
       <section className="relative -mt-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#060b18] to-background" />
-        <div className="absolute inset-0 dot-grid opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1510] via-[#1a1510] to-background" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-24">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <Video size={20} className="text-[#60a5fa]" />
-              <span className="text-sm text-[#60a5fa] font-medium">视频分享</span>
+              <Video size={20} className="text-primary" />
+              <span className="text-sm text-primary font-medium">视频分享</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-display font-bold text-white mb-4">
+            <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-4">
               视频
             </h1>
-            <p className="text-lg text-[#94a3b8] max-w-2xl">
+            <p className="text-lg text-muted-foreground max-w-2xl">
               技术教程、项目演示与经验分享。点击卡片跳转到 Bilibili 观看完整视频。
             </p>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-background" />
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
         {isLoading ? (
           <div className="flex justify-center py-20">
-            <Loader2 className="animate-spin text-[#3b82f6]" size={32} />
+            <Loader2 className="animate-spin text-primary" size={32} />
           </div>
         ) : videos.length > 0 ? (
           <motion.div
@@ -62,25 +61,25 @@ export default function Videos() {
                   className="block"
                 >
                   <div className="glass-card rounded-2xl overflow-hidden group cursor-pointer">
-                    <div className="relative aspect-video bg-[#0f172a] overflow-hidden">
+                    <div className="relative aspect-video bg-card overflow-hidden">
                       {video.thumbnail ? (
                         <img
                           src={video.thumbnail}
                           alt={video.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1e3a5f] to-[#0f172a]">
-                          <Play size={48} className="text-[#3b82f6]/40" />
+                        <div className="w-full h-full flex items-center justify-center bg-muted">
+                          <Play size={48} className="text-primary" />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-[#3b82f6] flex items-center justify-center shadow-lg shadow-[#3b82f6]/30">
-                          <Play size={24} className="text-white ml-1" fill="white" />
+                      <div className="absolute inset-0 bg-[#1a1510] opacity-0 group-hover:opacity-95 transition-opacity duration-300 ease-out flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                          <Play size={24} className="text-primary-foreground ml-1" fill="currentColor" />
                         </div>
                       </div>
                       {video.duration && (
-                        <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/70 text-white text-xs font-medium">
+                        <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#1a1510] text-foreground text-xs font-medium">
                           {video.duration}
                         </div>
                       )}
@@ -92,11 +91,11 @@ export default function Videos() {
                       </div>
                     </div>
                     <div className="p-5">
-                      <h3 className="text-base font-display font-semibold text-white mb-2 line-clamp-2 group-hover:text-[#60a5fa] transition-colors">
+                      <h3 className="text-base font-display font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-200">
                         {video.title}
                       </h3>
                       {video.description && (
-                        <p className="text-sm text-[#94a3b8] line-clamp-2 mb-3">
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
                           {video.description}
                         </p>
                       )}
@@ -115,12 +114,12 @@ export default function Videos() {
                             </span>
                           )}
                           {video.category && (
-                            <span className="px-2 py-0.5 rounded-md bg-[#3b82f6]/10 text-[#60a5fa]">
+                            <span className="px-2 py-0.5 rounded-md bg-accent text-primary">
                               {video.category}
                             </span>
                           )}
                         </div>
-                        <ExternalLink size={14} className="text-muted-foreground group-hover:text-[#60a5fa] transition-colors" />
+                        <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
                       </div>
                     </div>
                   </div>
@@ -130,9 +129,9 @@ export default function Videos() {
           </motion.div>
         ) : (
           <div className="text-center py-20">
-            <Play size={48} className="mx-auto text-muted-foreground/40 mb-4" />
+            <Play size={48} className="mx-auto text-muted-foreground mb-4" />
             <p className="text-muted-foreground text-lg">暂无视频</p>
-            <p className="text-muted-foreground/60 text-sm mt-2">可在 public/data/site.json 中配置 Bilibili 视频</p>
+            <p className="text-muted-foreground text-sm mt-2">可在 public/data/site.json 中配置 Bilibili 视频</p>
           </div>
         )}
       </section>

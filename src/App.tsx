@@ -6,6 +6,7 @@ import Articles from "@/pages/Articles";
 import ArticleDetail from "@/pages/ArticleDetail";
 import Videos from "@/pages/Videos";
 import Projects from "@/pages/Projects";
+import ProjectDetail from "@/pages/ProjectDetail";
 import NotFound from "@/pages/NotFound";
 
 // 与 Vite base 一致，保证在 gtr4321.github.io/Infinite-Loop/ 下路由与链接正确
@@ -21,6 +22,7 @@ function Routes() {
         <Route path="/articles/:id" component={ArticleDetail} />
         <Route path="/videos" component={Videos} />
         <Route path="/projects" component={Projects} />
+        <Route path="/projects/:id" component={ProjectDetail} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
