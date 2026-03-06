@@ -233,7 +233,8 @@ export default function Projects() {
             className="absolute inset-0 bg-black/60"
             onClick={() => setOpenId(null)}
           />
-          <div className="absolute inset-0 flex items-center justify-center p-4">
+          {/* Align modal below the fixed top nav */}
+          <div className="absolute inset-0 flex items-start justify-center pt-24 pb-6 px-4">
             <div className="glass-card rounded-2xl w-full max-w-4xl border border-[#3b82f6]/20 shadow-xl shadow-black/40 overflow-hidden">
               <div className="flex items-start justify-between gap-4 p-6 border-b border-[#3b82f6]/10">
                 <div className="min-w-0">
@@ -271,7 +272,7 @@ export default function Projects() {
                 </button>
               </div>
 
-              <div className="p-6 max-h-[70vh] overflow-auto">
+              <div className="p-6 max-h-[calc(100vh-240px)] overflow-auto">
                 {readmeLoading ? (
                   <div className="flex items-center gap-3 text-muted-foreground">
                     <Loader2 className="animate-spin" size={18} />
