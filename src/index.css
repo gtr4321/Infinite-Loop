@@ -136,6 +136,11 @@
   @media (min-width: 1024px) {
     .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; }
   }
+  /* 页面 hero 底部渐变遮罩：从透明过渡到页面背景，与下方内容区融合 */
+  .hero-bottom-fade {
+    background: linear-gradient(to bottom, transparent, var(--background));
+  }
+
   .glass-card {
     background: var(--card);
     border: 1px solid var(--border);

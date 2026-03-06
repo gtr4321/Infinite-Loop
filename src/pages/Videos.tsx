@@ -2,6 +2,9 @@ import { useVideos } from "@/lib/useSiteData";
 import { motion } from "framer-motion";
 import { Play, Eye, ThumbsUp, ExternalLink, Loader2, Video } from "lucide-react";
 
+const base = (import.meta.env.BASE_URL || "/").replace(/\/?$/, "/");
+const VIDEOS_BG = `${base}hero-bg-zhongshi.png`;
+
 const stagger = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.08 } },
@@ -18,7 +21,15 @@ export default function Videos() {
   return (
     <div>
       <section className="relative -mt-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1510] via-[#1a1510] to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1510] via-[#1c1812] to-background" />
+        <div
+          className="absolute inset-0 bg-cover bg-center z-[1]"
+          style={{ backgroundImage: `url(${VIDEOS_BG})` }}
+        />
+        <div
+          className="absolute inset-0 z-[2] bg-gradient-to-b from-[#1a1510]/85 via-[#1c1812]/70 via-[#1e1a14]/50 to-background/90"
+          aria-hidden
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-48 pb-24">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -33,11 +44,11 @@ export default function Videos() {
               视频
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              技术教程、项目演示与经验分享。点击卡片跳转到 Bilibili 观看完整视频。
+              技术教程、项目演示与经验分享。点击卡片跳转到视频网站观看完整视频。
             </p>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-background" />
+        <div className="absolute bottom-0 left-0 right-0 h-28 z-[3] pointer-events-none hero-bottom-fade" aria-hidden />
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
